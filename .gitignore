@@ -3,7 +3,6 @@
 *.tfstate.backup
 *.tfvars
 .terraform/
-.terraform.lock.hcl
 terraform.tfplan
 
 # Secrets et credentials
