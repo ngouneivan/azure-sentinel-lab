@@ -1,0 +1,30 @@
+﻿{
+  "location": "francecentral",
+  "properties": {
+    "dataSources": {
+      "windowsEventLogs": [
+        {
+          "name": "securityEvents",
+          "streams": ["Microsoft-SecurityEvent"],
+          "xPathQueries": [
+            "Security!*[System[(band(Keywords,13510798882111488))]]"
+          ]
+        }
+      ]
+    },
+    "destinations": {
+      "logAnalytics": [
+        {
+          "name": "law-destination",
+          "workspaceResourceId": "/subscriptions/512817a3-87c7-4af5-a7ea-829b55885255/resourceGroups/rg-sentinel-lab/providers/Microsoft.OperationalInsights/workspaces/law-sentinel-lab"
+        }
+      ]
+    },
+    "dataFlows": [
+      {
+        "streams": ["Microsoft-SecurityEvent"],
+        "destinations": ["law-destination"]
+      }
+    ]
+  }
+}
