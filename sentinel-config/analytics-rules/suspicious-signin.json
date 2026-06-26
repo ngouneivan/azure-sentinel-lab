@@ -1,0 +1,6 @@
+﻿{
+  "name": "Connexion suspecte hors pays",
+  "severity": "Medium",
+  "tactic": "InitialAccess",
+  "status": "pending"
+}

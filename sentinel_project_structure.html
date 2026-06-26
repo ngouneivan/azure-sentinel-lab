@@ -1,0 +1,84 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.tree{font-family:var(--font-mono);font-size:13px;line-height:1.9;padding:1rem 0}
+.folder{color:var(--color-text-info);font-weight:500}
+.file{color:var(--color-text-primary)}
+.desc{color:var(--color-text-secondary);font-size:11px;margin-left:8px}
+.section{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:10px}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em}
+.row{display:flex;align-items:baseline;gap:0}
+.indent1{padding-left:20px}
+.indent2{padding-left:40px}
+.indent3{padding-left:60px}
+</style>
+<h2 class="sr-only">Structure du projet Azure Sentinel lab avec tous les dossiers et fichiers</h2>
+
+<div class="section">
+<div class="section-title">Racine du projet</div>
+<div class="tree">
+<div class="row"><span class="folder">Azure-Sentinel-Lab/</span><span class="desc">← D:\personnel-ivan\PROJETS-PERSO-LAB\Azure Sentinel...</span></div>
+<div class="indent1">
+  <div class="row"><span class="file">README.md</span><span class="desc">Documentation principale du lab</span></div>
+  <div class="row"><span class="file">.gitignore</span><span class="desc">Exclut les secrets, state Terraform, credentials</span></div>
+  <div class="row"><span class="file">lab-config.json</span><span class="desc">Variables globales du lab (subscription, RG, location)</span></div>
+</div>
+
+<div class="indent1 folder">infrastructure/</div>
+<div class="indent2">
+  <div class="row"><span class="file">main.tf</span><span class="desc">Resource group, workspace Log Analytics</span></div>
+  <div class="row"><span class="file">sentinel.tf</span><span class="desc">Activation Sentinel sur le workspace</span></div>
+  <div class="row"><span class="file">variables.tf</span><span class="desc">Déclaration des variables Terraform</span></div>
+  <div class="row"><span class="file">terraform.tfvars</span><span class="desc">Valeurs — jamais dans Git !</span></div>
+  <div class="row"><span class="file">outputs.tf</span><span class="desc">Workspace ID, Sentinel ID exportés</span></div>
+  <div class="row"><span class="file">backend.tf</span><span class="desc">Remote state Azure Blob</span></div>
+</div>
+
+<div class="indent1 folder">sentinel-config/</div>
+<div class="indent2">
+  <div class="folder indent0">connectors/</div>
+  <div class="indent3">
+    <div class="row"><span class="file">windows-security-events.json</span><span class="desc">DCR config Windows Events</span></div>
+    <div class="row"><span class="file">entra-id-connector.json</span><span class="desc">Paramètres connector Entra ID</span></div>
+  </div>
+  <div class="folder indent0" style="padding-left:40px">analytics-rules/</div>
+  <div class="indent3">
+    <div class="row"><span class="file">brute-force-rdp.json</span><span class="desc">Règle détection brute force RDP</span></div>
+    <div class="row"><span class="file">suspicious-signin.json</span><span class="desc">Connexion suspecte Entra ID</span></div>
+    <div class="row"><span class="file">account-creation.json</span><span class="desc">Création compte inattendue</span></div>
+  </div>
+</div>
+
+<div class="indent1 folder">kql-queries/</div>
+<div class="indent2">
+  <div class="row"><span class="file">detection-brute-force.kql</span><span class="desc">EventID 4625 — échecs RDP</span></div>
+  <div class="row"><span class="file">detection-suspicious-signin.kql</span><span class="desc">SigninLogs hors pays attendus</span></div>
+  <div class="row"><span class="file">detection-account-creation.kql</span><span class="desc">EventID 4720 — compte créé</span></div>
+  <div class="row"><span class="file">detection-privilege-escalation.kql</span><span class="desc">EventID 4672 — élévation privs</span></div>
+  <div class="row"><span class="file">hunting-global-activity.kql</span><span class="desc">Tableau de bord activité 24h</span></div>
+</div>
+
+<div class="indent1 folder">playbooks/</div>
+<div class="indent2">
+  <div class="row"><span class="file">notify-on-incident.json</span><span class="desc">Logic App — email SOC sur incident</span></div>
+  <div class="row"><span class="file">playbook-deploy.ps1</span><span class="desc">Script déploiement Logic App via CLI</span></div>
+</div>
+
+<div class="indent1 folder">scripts/</div>
+<div class="indent2">
+  <div class="row"><span class="file">Simulate-BruteForce.ps1</span><span class="desc">Simulation attaque RDP (15 échecs)</span></div>
+  <div class="row"><span class="file">Simulate-AccountCreation.ps1</span><span class="desc">Création/suppression compte test</span></div>
+  <div class="row"><span class="file">Check-DataIngestion.ps1</span><span class="desc">Vérifie que les tables KQL ont des données</span></div>
+  <div class="row"><span class="file">Cleanup-Lab.ps1</span><span class="desc">Supprime les ressources Azure du lab</span></div>
+</div>
+
+<div class="indent1 folder">docs/</div>
+<div class="indent2">
+  <div class="row"><span class="folder">screenshots/</span><span class="desc">Captures pour LinkedIn / portfolio</span></div>
+  <div class="row"><span class="file">architecture.md</span><span class="desc">Schéma et explication de l'archi</span></div>
+  <div class="row"><span class="file">lab-journal.md</span><span class="desc">Journal de progression du lab</span></div>
+  <div class="row"><span class="file">linkedin-post-draft.md</span><span class="desc">Brouillon du post LinkedIn</span></div>
+</div>
+</div>
+</div>

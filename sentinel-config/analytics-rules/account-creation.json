@@ -1,0 +1,6 @@
+﻿{
+  "name": "Création compte inattendue",
+  "severity": "Medium",
+  "tactic": "Persistence",
+  "status": "pending"
+}

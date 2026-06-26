@@ -1,0 +1,5 @@
+﻿{
+  "playbook": "notify-on-incident",
+  "trigger": "Microsoft Sentinel incident",
+  "status": "pending"
+}

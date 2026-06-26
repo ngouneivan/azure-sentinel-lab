@@ -1,0 +1,5 @@
+﻿{
+  "connector": "WindowsSecurityEvents",
+  "status": "pending",
+  "notes": "Configurer via DCR dans le portail Sentinel"
+}

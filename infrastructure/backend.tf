@@ -1,4 +1,4 @@
-﻿# backend.tf — Remote state Azure Blob
+# backend.tf — Remote state Azure Blob
 # A compléter après création du storage account
 terraform {
   backend "azurerm" {

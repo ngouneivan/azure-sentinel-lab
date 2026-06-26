@@ -1,0 +1,11 @@
+﻿{
+  "project": "azure-sentinel-lab",
+  "location": "francecentral",
+  "resource_group": "rg-sentinel-lab",
+  "workspace_name": "law-sentinel-lab",
+  "tags": {
+    "env": "lab",
+    "project": "sentinel-lab",
+    "owner": "ivan"
+  }
+}

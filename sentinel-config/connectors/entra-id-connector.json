@@ -1,0 +1,5 @@
+﻿{
+  "connector": "AzureActiveDirectory",
+  "status": "pending",
+  "tables": ["SigninLogs", "AuditLogs", "AADNonInteractiveUserSignInLogs"]
+}
