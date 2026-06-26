@@ -1,0 +1,23 @@
+﻿// Élévation de privilèges — EventID 4672
+// A remplir à l'étape KQL
+// ============================================================
+// Détection : Élévation de privilèges
+// EventID 4672 — Privilèges spéciaux assignés à une nouvelle connexion
+// MITRE ATT&CK : T1078 (Valid Accounts) — Tactique : Privilege Escalation
+// ============================================================
+
+SecurityEvent
+| where TimeGenerated > ago(24h)
+| where EventID == 4672                           // Privilèges spéciaux assignés
+| where SubjectUserName !endswith "$"             // Exclure les comptes machine
+| where SubjectUserName !in ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE")
+| summarize 
+    Occurrences = count(),
+    Privileges = make_set(PrivilegeList),
+    Machines = make_set(Computer)
+    by SubjectUserName, bin(TimeGenerated, 1h)
+| order by Occurrences desc
+
+// Note SOC : en production, affiner pour n'alerter que sur les comptes
+// inhabituels ou les privilèges critiques (SeDebugPrivilege, SeTakeOwnershipPrivilege)
+// afin de réduire les faux positifs.

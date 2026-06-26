@@ -1,0 +1,21 @@
+﻿// Création de compte — EventID 4720
+// A remplir à l'étape KQL
+// ============================================================
+// Détection : Création de compte suspecte
+// EventID 4720 — Compte utilisateur créé
+// MITRE ATT&CK : T1136 (Create Account) — Tactique : Persistence
+// ============================================================
+
+SecurityEvent
+| where TimeGenerated > ago(24h)
+| where EventID == 4720                            // Compte utilisateur créé
+| project 
+    TimeGenerated,
+    Computer,
+    Createur = SubjectUserName,                    // Qui a créé le compte
+    CompteCree = TargetUserName,                    // Le compte créé
+    Domaine = TargetDomainName
+| order by TimeGenerated desc
+
+// Note SOC : croiser avec les heures ouvrées et la liste des admins autorisés.
+// Une création hors plage horaire ou par un compte non-admin = signal fort.

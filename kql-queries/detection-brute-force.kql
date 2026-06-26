@@ -1,0 +1,19 @@
+﻿// Détection brute force RDP — EventID 4625
+// A remplir à l'étape KQL
+// ============================================================
+// Détection : Brute Force / Password Spraying
+// EventID 4625 — Échecs de connexion répétés
+// MITRE ATT&CK : T1110 (Brute Force) — Tactique : Credential Access
+// ============================================================
+
+SecurityEvent
+| where TimeGenerated > ago(24h)
+| where EventID == 4625                          // Échec de connexion
+| summarize 
+    NombreEchecs = count(),
+    ComptesVises = make_set(TargetUserName),
+    PremiereVue = min(TimeGenerated),
+    DerniereVue = max(TimeGenerated)
+    by Computer, IpAddress, bin(TimeGenerated, 10m)
+| where NombreEchecs >= 3                         // Seuil d'alerte (lab : 3, prod : 10-20)
+| order by NombreEchecs desc

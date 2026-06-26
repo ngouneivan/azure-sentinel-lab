@@ -1,0 +1,27 @@
+﻿// Tableau de bord activité Security 24h
+// A remplir à l'étape KQL
+// ============================================================
+// Threat Hunting : Tableau de bord global de l'activité Security
+// Vue d'ensemble des EventID sur 24h, traduits en clair
+// Usage : monitoring quotidien, détection d'anomalies de volume
+// ============================================================
+
+SecurityEvent
+| where TimeGenerated > ago(24h)
+| summarize Nombre = count() by EventID
+| extend Description = case(
+    EventID == 4624, "Connexion réussie",
+    EventID == 4625, "Échec de connexion",
+    EventID == 4634, "Déconnexion",
+    EventID == 4648, "Connexion avec credentials explicites",
+    EventID == 4672, "Privilèges spéciaux assignés",
+    EventID == 4720, "Compte créé",
+    EventID == 4726, "Compte supprimé",
+    EventID == 4732, "Membre ajouté à un groupe",
+    EventID == 4768, "Ticket Kerberos TGT demandé",
+    EventID == 4769, "Ticket Kerberos service demandé",
+    EventID == 4688, "Processus créé",
+    strcat("EventID ", tostring(EventID))
+  )
+| project EventID, Description, Nombre
+| order by Nombre desc
