@@ -1,0 +1,22 @@
+﻿{
+  "properties": {
+    "displayName": "auto-notify-brute-force",
+    "order": 1,
+    "triggeringLogic": {
+      "isEnabled": true,
+      "triggersOn": "Incidents",
+      "triggersWhen": "Created",
+      "conditions": []
+    },
+    "actions": [
+      {
+        "order": 1,
+        "actionType": "RunPlaybook",
+        "actionConfiguration": {
+          "logicAppResourceId": "/subscriptions/512817a3-87c7-4af5-a7ea-829b55885255/resourceGroups/rg-sentinel-lab/providers/Microsoft.Logic/workflows/pb-notify-incident-email",
+          "tenantId": "f4c3cb00-44f5-44d2-af46-7ed0e38cc5c7"
+        }
+      }
+    ]
+  }
+}
