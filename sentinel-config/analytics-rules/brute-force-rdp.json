@@ -1,0 +1,16 @@
+﻿{
+  "name": "Brute Force - Échecs de connexion répétés",
+  "description": "Détecte 3 échecs de connexion ou plus (EventID 4625) en 10 minutes depuis une même source",
+  "severity": "Medium",
+  "tactic": "CredentialAccess",
+  "technique": "T1110",
+  "status": "Enabled",
+  "frequency": "PT5M",
+  "period": "PT10M",
+  "threshold": "gt 0",
+  "entityMapping": {
+    "Host": "Computer",
+    "IP": "IpAddress"
+  },
+  "query": "SecurityEvent | where EventID == 4625 | summarize NombreEchecs = count(), ComptesVises = make_set(TargetUserName) by Computer, IpAddress, bin(TimeGenerated, 10m) | where NombreEchecs >= 3"
+}
